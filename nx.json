@@ -1,9 +1,14 @@
 {
   "npmScope": "sb",
-  "affected": { "defaultBase": "master" },
+  "affected": {
+    "defaultBase": "master"
+  },
   "implicitDependencies": {
     "angular.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
@@ -12,14 +17,41 @@
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ]
+      }
     }
   },
   "projects": {
-    "sb": { "tags": [] },
-    "sb-e2e": { "tags": [], "implicitDependencies": ["sb"] },
-    "lib1": { "tags": [] },
-    "lib2": { "tags": [] },
-    "styles": { "tags": [] }
+    "sb": {
+      "tags": []
+    },
+    "sb-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "sb"
+      ]
+    },
+    "lib1": {
+      "tags": []
+    },
+    "lib2": {
+      "tags": []
+    },
+    "styles": {
+      "tags": []
+    },
+    "lib1-e2e": {
+      "tags": [],
+      "implicitDependencies": [
+        "lib1"
+      ]
+    }
   }
 }
