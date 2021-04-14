@@ -119,3 +119,108 @@ nx run lib1:storybook
 ```
 
 Success!
+
+## Migrate to Nx 11.6.2
+
+Initial migration steps:
+
+```bash
+nx migrate 11.6.2
+npm install --legacy-peer-deps
+nx migrate --run-migrations
+```
+
+Run Storybook instance:
+
+```bash
+nx run lib1:storybook
+```
+
+Receive warning during config:
+
+```bash
+info => Loading presets
+info => Loading presets
+info => Loading 1 config file in "libs/lib1/.storybook"
+info => Adding stories defined in "libs/lib1/.storybook/main.js"
+info => Found custom tsconfig.json
+info => Using angular project 'sb' for configuring Storybook.
+info => Loading angular-cli config.
+WARN Failed to load the Angular CLI config. Using Storybook's default config instead.
+WARN TypeError: Cannot read property 'minify' of undefined
+WARN     at getCommonConfig (/Users/philip/storybook-upgrades/sb/node_modules/@angular-devkit/build-angular/src/webpack/configs/common.js:304:28)
+WARN     at Object.getAngularCliParts (/Users/philip/storybook-upgrades/sb/node_modules/@storybook/angular/dist/server/angular-cli_utils.js:83:30)
+WARN     at Object.applyAngularCliWebpackConfig (/Users/philip/storybook-upgrades/sb/node_modules/@storybook/angular/dist/server/angular-cli_config.js:134:40)
+WARN     at Object.webpackFinal (/Users/philip/storybook-upgrades/sb/node_modules/@storybook/angular/dist/server/framework-preset-angular-cli.js:10:33)
+WARN     at /Users/philip/storybook-upgrades/sb/node_modules/@storybook/core/dist/server/presets.js:259:28
+WARN  TypeError: Cannot read property 'minify' of undefined
+WARN     at getCommonConfig (/Users/philip/storybook-upgrades/sb/node_modules/@angular-devkit/build-angular/src/webpack/configs/common.js:304:28)
+WARN     at Object.getAngularCliParts (/Users/philip/storybook-upgrades/sb/node_modules/@storybook/angular/dist/server/angular-cli_utils.js:83:30)
+WARN     at Object.applyAngularCliWebpackConfig (/Users/philip/storybook-upgrades/sb/node_modules/@storybook/angular/dist/server/angular-cli_config.js:134:40)
+WARN     at Object.webpackFinal (/Users/philip/storybook-upgrades/sb/node_modules/@storybook/angular/dist/server/framework-preset-angular-cli.js:10:33)
+WARN     at /Users/philip/storybook-upgrades/sb/node_modules/@storybook/core/dist/server/presets.js:259:28
+WARN => Failed to get angular-cli webpack config.
+info => Loading custom Webpack config (full-control mode).
+```
+
+Receive error during compilation:
+
+```bash
+ERROR in ./libs/lib1/src/lib/comp1/comp1.component.scss
+Module build failed (from ./node_modules/@storybook/angular/node_modules/sass-loader/dist/cjs.js):
+SassError: Can't find stylesheet to import.
+  ╷
+1 │ @use 'global' as g;
+  │ ^^^^^^^^^^^^^^^^^^
+  ╵
+  /Users/philip/storybook-upgrades/sb/libs/lib1/src/lib/comp1/comp1.component.scss 1:1  root stylesheet
+ @ ./libs/lib1/src/lib/comp1/comp1.component.ts 12:18-51 12:63-96 12:108-141 12:153-186
+ @ ./libs/lib1/src/lib/comp1/comp1.component.stories.ts
+ @ ./libs/lib1/src/lib sync ^\.(?:(?:^|\/|(?:(?:(?!(?:^|\/)\.).)*?)\/)(?!\.)(?=.)[^/]*?\.stories\.(js|jsx|ts|tsx))$
+ @ ./libs/lib1/.storybook/generated-stories-entry.js
+ @ multi ./node_modules/@storybook/core/dist/server/common/polyfills.js ./node_modules/@storybook/core/dist/server/preview/globals.js ./libs/lib1/.storybook/storybook-init-framework-entry.js ./libs/lib1/.storybook/preview.js-generated-config-entry.js ./libs/lib1/.storybook/generated-stories-entry.js (webpack)-hot-middleware/client.js?reload=true&quiet=false&noInfo=true
+```
+
+Adjust Storybook package versions back to having carot:
+
+````json
+    "@storybook/addon-knobs": "^6.1.11",
+    "@storybook/angular": "^6.1.11",
+    ```
+````
+
+Run install
+
+```bash
+npm i
+```
+
+Run Storybook instance:
+
+```bash
+nx run lib1:storybook
+```
+
+Receive same errors as before
+
+Change Storybook package versions to use 6.2.7:
+
+```json
+    "@storybook/addon-knobs": "^6.2.7",
+    "@storybook/angular": "^6.2.7",
+```
+
+Run install
+
+```bash
+npm i
+```
+
+Run Storybook instance:
+
+```bash
+nx run lib1:storybook
+```
+
+Success!
+
