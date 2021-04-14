@@ -18,7 +18,10 @@
             "aot": true,
             "assets": ["apps/sb/src/favicon.ico", "apps/sb/src/assets"],
             "styles": ["apps/sb/src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": ["libs/styles/src/lib"]
+            }
           },
           "configurations": {
             "production": {
@@ -105,6 +108,77 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/sb-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "lib1": {
+      "projectType": "library",
+      "root": "libs/lib1",
+      "sourceRoot": "libs/lib1/src",
+      "prefix": "sb",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/lib1/src/**/*.ts",
+              "libs/lib1/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/lib1"],
+          "options": {
+            "jestConfig": "libs/lib1/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "lib2": {
+      "projectType": "library",
+      "root": "libs/lib2",
+      "sourceRoot": "libs/lib2/src",
+      "prefix": "sb",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/lib2/src/**/*.ts",
+              "libs/lib2/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/lib2"],
+          "options": {
+            "jestConfig": "libs/lib2/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "styles": {
+      "root": "libs/styles",
+      "sourceRoot": "libs/styles/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/styles/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/styles"],
+          "options": {
+            "jestConfig": "libs/styles/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
