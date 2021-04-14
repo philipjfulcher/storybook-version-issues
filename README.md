@@ -224,3 +224,14 @@ nx run lib1:storybook
 
 Success!
 
+## Migrate to Nx 12.0.4
+
+Initial migration steps:
+
+```bash
+nx migrate 11.6.2
+npm install --legacy-peer-deps
+nx migrate --run-migrations
+```
+
+Success!
